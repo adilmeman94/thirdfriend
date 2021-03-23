@@ -2,8 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const PORT = process.env.Port || 9000;
 require("dotenv").config();
+const PORT = process.env.PORT || 9000;
 // const url = "mongodb://localhost/ThirdFriendDB"; // offline database
 
 const app = express();
@@ -28,7 +28,7 @@ app.use("/", postData);
 
 app.listen(PORT, function () {
   // listen server on port 9000
-  console.log(`server Started on port  ${PORT}`);
+  console.log(`server Started on port: ${PORT}`);
 });
 
 connectDB();
