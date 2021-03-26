@@ -10,7 +10,7 @@ export default function Contactus() {
           <p>
             <strong>ThirdFriend.com </strong>provides support for any
             difficulties arised to use our website. You can reach out to
-            "thirdfriend@gmail.com " for facing any cause to use seamless
+            "thirdfriend01@gmail.com " for facing any cause to use seamless
             experience.
           </p>
           <br></br>
@@ -25,7 +25,7 @@ export default function Contactus() {
                 <br />
                 Gujarat, India
                 <br />
-                thirdfriend@gmail.com
+                thirdfriend01@gmail.com
               </strong>
             </p>
           </div>
