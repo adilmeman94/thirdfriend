@@ -1,0 +1,44 @@
+.insidepage5 {
+  margin: auto;
+  width: 40%;
+  height: 400px;
+  background-color: white;
+}
+.content {
+  margin: auto;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+}
+.homepage2 {
+  margin: auto;
+  width: 80%;
+  height: 100%;
+  padding-top: 50px;
+  padding-bottom: 75px;
+  text-align: center;
+}
+.leftdiv {
+  position: absolute;
+  width: 400px;
+  height: 600%;
+  padding-bottom: 75px;
+}
+.rightdiv {
+  position: relative;
+}
+.howheader {
+  text-align: center;
+  padding-bottom: 75px;
+}
+.para3 {
+  text-align: left;
+  padding-top: 50px;
+  font-size: larger;
+}
+.text1 {
+  margin-bottom: 20px;
+}
