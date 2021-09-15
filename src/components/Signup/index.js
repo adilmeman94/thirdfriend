@@ -76,6 +76,13 @@ export default class Signup extends React.Component {
     }
 
     //password
+    // const passExp = /\S+@_&%+/;
+    // var validPassword = passExp.test(String(signUpPassword).toLowerCase());
+
+    // if (!validPassword) {
+    //   errors.push("signUpPassword");
+    // }
+
     if (signUpPassword === "") {
       errors.push("signUpPassword");
     }

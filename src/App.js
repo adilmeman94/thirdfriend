@@ -30,6 +30,17 @@ function PrivateRoute({ isLogin, component: Component, ...rest }) {
   );
 }
 class App extends Component {
+  componentDidMount() {
+    const emailId = localStorage.getItem("email");
+    if (emailId) {
+      const action = {
+        type: "LOGIN",
+        payload: emailId,
+      };
+      this.props.dispatch(action);
+    }
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -88,10 +99,15 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log("REDUX STORE", state);
   return {
     user: state.user,
   };
 }
 
-export default connect(mapStateToProps)(App);
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch: dispatch,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

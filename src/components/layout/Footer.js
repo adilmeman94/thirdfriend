@@ -12,7 +12,7 @@ function Footer() {
           <p>Terms &amp; Conditions </p>
         </Link>
       </div>
-      <div className="div2 text-light  mx-auto">
+      <div className="div2 text-light mx-auto">
         <p>
           ThirdFriend@ is a Registered Trademark of ThirdFriend Technology Pvt
           Ltd.

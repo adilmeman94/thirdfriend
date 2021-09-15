@@ -24,34 +24,14 @@ class Signin extends Component {
     this.onSignIn = this.onSignIn.bind(this);
   }
 
-  componenetDidMount() {
-    console.log("componentDidMount called");
-    const objToken = localStorage.getItem("auth");
-    console.log(objToken, "takoen");
-    if (objToken) {
-      // verify token
-      this.setState({
-        isLoading: true,
-      });
-      fetch("http://localhost:9000/api/account/verify?token=" + objToken)
-        .then((res) => res.json())
-        .then((json) => {
-          console.log(json);
-          if (json.success) {
-            this.setState({
-              token: "",
-              isLoading: false,
-            });
-          } else {
-            this.setState({
-              isLoading: false,
-            });
-          }
-        });
-    } else {
-      this.setState({
-        isLoading: false,
-      });
+  componentDidMount() {
+    const emailId = localStorage.getItem("email");
+    if (emailId) {
+      const action = {
+        type: "LOGIN",
+        payload: emailId,
+      };
+      this.props.dispatch(action);
     }
   }
   hasError(key) {
@@ -85,11 +65,7 @@ class Signin extends Component {
       errors.push("signInEmail");
     }
 
-    //password
-    // const validPassword = /\S+@_&%+/;
-    // if (!validPassword) {
-    //   errors.push("signInPassword");
-    // }
+    // password
     if (signInPassword === "") {
       errors.push("signInPassword");
     }
@@ -116,10 +92,9 @@ class Signin extends Component {
       })
         .then((res) => res.json())
         .then((json) => {
-          console.log(json);
           if (json.success) {
-            localStorage.setItem("auth", JSON.stringify(json.token));
-            console.log(json.token);
+            localStorage.setItem("auth", json.token);
+            localStorage.setItem("email", json.data.email);
             toast.success(json.message);
             this.setState({
               signInError: json.message,
@@ -137,9 +112,10 @@ class Signin extends Component {
           }
           if (localStorage.auth) {
             setTimeout(() => {
+              const emailId = localStorage.getItem("email");
               const action = {
                 type: "LOGIN",
-                payload: signInEmail,
+                payload: emailId,
                 signInError,
               };
               this.props.dispatch(action);
@@ -152,7 +128,6 @@ class Signin extends Component {
   }
 
   render() {
-    console.log("render");
     const { signInEmail, signInPassword } = this.state;
 
     return (
@@ -205,7 +180,7 @@ class Signin extends Component {
                   this.hasError("signInPassword") ? "inline-errormsg" : "hidden"
                 }
               >
-                Please enter a password
+                Please enter a password is invalid or missing
               </div>
             </div>
             <br></br>

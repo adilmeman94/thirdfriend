@@ -96,7 +96,6 @@ export default class User extends React.Component {
         `https://thirdfriend01.herokuapp.com/traveller?origin=${origin}&destination=${destination}&startJourneyDate=${startJourneyDate}`
       ).then((result) => {
         result.json().then((data) => {
-          console.log("data", data);
           this.setState({ journeyData: data, loading: false });
         });
       });
@@ -202,7 +201,6 @@ export default class User extends React.Component {
               this.state.journeyData.length !== 0 ? (
                 this.state.journeyData.map((item, key) => (
                   <div>
-                    {console.log(this.state.journeyData)}
                     <table className="table table-hover table-dark table-responsive">
                       <thead>
                         <tr>
