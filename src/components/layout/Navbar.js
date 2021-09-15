@@ -14,18 +14,41 @@ function Navbar(props) {
     props.dispatch(action);
   }
   return (
-    <div>
-      {/* using some bootstrap class */}
-      <nav className="navbar navbar-light bg-dark  ">
-        <img
-          src={logo}
-          style={{ width: "192px", height: "100px" }}
-          alt="logo1"
-        />
-        <div className="col-md-6">
-          <ul className="nav text-warning font-weight-normal">
+    <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+      <div className="container-fluid">
+        <Link className="navbar-brand" to="/">
+          <img
+            src={logo}
+            style={{ width: "184px", height: "58px" }}
+            alt="logo1"
+          />
+        </Link>
+        <button
+          className="navbar-toggler order-first"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <button
+          className="navbar-toggler "
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#account"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="fa fa-user"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav text-center">
             <li className="nav-item">
-              <Link className="nav-link text-light active" to="/">
+              <Link className="nav-link text-light" aria-current="page" to="/">
                 Home
               </Link>
             </li>
@@ -41,62 +64,50 @@ function Navbar(props) {
             </li>
           </ul>
         </div>
-
-        <div className="d-grid gap-2 d-md-flex justify-content-md-end ">
+        <div className="collapse navbar-collapse margin-auth" id="account">
           {!props.name ? (
-            <div>
-              <Link to="/signin">
-                <button className="btn btn-outline-light me-md-2" type="button">
-                  Sign In
-                </button>
-              </Link>
-              <Link to="/signup">
-                <button className="btn btn-outline-light" type="button">
-                  Sign Up
-                </button>
-              </Link>
-            </div>
+            <ul className="navbar-nav text-center">
+              <li className="nav-item">
+                <Link className="nav-link text-light" to="/signin">
+                  <button className="btn btn-secondary" type="button">
+                    SignIn
+                  </button>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link text-light" to="/signup">
+                  <button className="btn btn-secondary" type="button">
+                    SignUp
+                  </button>
+                </Link>
+              </li>
+            </ul>
           ) : (
-            <div className="d-grid gap-2 d-md-block">
-              <button type="button" className="btn btn-outline-light">
+            <div className="dropdown text-center">
+              <button
+                className="btn btn-secondary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
                 {props.name}
               </button>
-              <button
-                type="button"
-                className="btn btn-outline-secondary"
-                onClick={signout}
-              >
-                Signout
-              </button>
+              <div className="dropdown-menu dropdown-menu-right bg-dark text-center">
+                <button
+                  type="submit"
+                  className="btn text-light"
+                  aria-labelledby="dropdownMenuButton1"
+                  onClick={signout}
+                >
+                  Logout
+                </button>
+              </div>
             </div>
-            // <div className="dropdown">
-            //   <button
-            //     className="btn btn-secondary dropdown-toggle"
-            //     type="button"
-            //     id="dropdownMenu2"
-            //     data-toggle="dropdown"
-            //     aria-haspopup="true"
-            //     aria-expanded="false"
-            //   >
-            //     {props.name}
-            //   </button>
-            //   <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-            //     <button
-            //       className="dropdown-item"
-            //       type="button"
-            //       onClick={signout}
-            //     >
-            //       Signout
-            //     </button>
-            //     <button className="dropdown-item" type="button">
-            //       Profile
-            //     </button>
-            //   </div>
-            // </div>
           )}
         </div>
-      </nav>
-    </div>
+      </div>
+    </nav>
   );
 }
 function mapStateToProps(state) {

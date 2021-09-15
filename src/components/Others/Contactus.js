@@ -3,7 +3,7 @@ import React from "react";
 export default function Contactus() {
   return (
     <div className="homepage">
-      <div className="insidepage">
+      <div className="insidepage col-lg-5 col-md-6 col-sm-7 col-xs-12 custom-width">
         <div className="content">
           <h3>Contact Us</h3>
           <br></br>
@@ -15,7 +15,7 @@ export default function Contactus() {
           </p>
           <br></br>
           <br></br>
-          <div className="container">
+          <div className="container mb-5">
             <p>
               <strong>
                 ThirdFriend Technology Private Limited

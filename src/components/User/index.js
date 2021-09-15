@@ -1,8 +1,6 @@
 import React from "react";
-//import { Redirect } from "react-router-dom";
 import "./styles.css";
 import "bootstrap-css-only";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import $ from "jquery";
 import Spinner from "../Others/Spinner";
@@ -11,11 +9,11 @@ export default class User extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
+      loading: false,
       origin: "",
       destination: "",
-      startJourneyDate: new Date(),
-      journeyData: "",
+      startJourneyDate: "",
+      journeyData: null,
       journeyData1: "",
       errors: [],
     };
@@ -40,17 +38,6 @@ export default class User extends React.Component {
         }
       }
     );
-    //   fetch(
-    //     "http://localhost:9000/traveller"
-    //     //?origin=" + origin
-    //     // "&destination=" + destination,
-    //     // "&startJourneyDate=" + startJourneyDate
-    //   ).then((result) => {
-    //     result.json().then((data) => {
-    //       console.log("data", data);
-    //       this.setState({ journeyData: data });
-    //     });
-    //   });
   }
 
   hasError(key) {
@@ -101,24 +88,9 @@ export default class User extends React.Component {
     if (errors.length > 0) {
       return false;
     } else {
-      //   console.log(journeyData);
-      //   const origin1 = origin.trim().toLowerCase();
-      //   const destination1 = destination.trim().toLowerCase();
-      //   if (origin.length > 0 && destination.length > 0) {
-      //     const journeyData2 = journeyData.filter(function (i) {
-      //       return (
-      //         i.origin.toLowerCase().match(origin1) &&
-      //         i.destination.toLowerCase().match(destination1) &&
-      //         i.startJourneyDate.match(startJourneyDate)
-      //       );
-      //     });
-      //     console.log(journeyData2);
-      //     if (journeyData2 === "") {
-      //       toast.error("Data is not found!!!!");
-      //     }
-      //     this.setState({ journeyData1: journeyData2 });
-      //   }
-      // }
+      this.setState({
+        loading: true,
+      });
 
       fetch(
         `https://thirdfriend01.herokuapp.com/traveller?origin=${origin}&destination=${destination}&startJourneyDate=${startJourneyDate}`
@@ -130,17 +102,12 @@ export default class User extends React.Component {
       });
     }
   }
-  // if (origin.length > 0) {
-  //   journeyData = journeyData.filter(function(i) {
-  //     return i.origin.match( origin ) || i.destination.match( destination ) || i.startJourneyDate.match( startJourneyDate );
-  //   });
-  // }
 
   render() {
     return (
       <div className="homepage">
-        <ToastContainer position={"top-center"} />
-        <div className="insidepage3">
+        {/* <ToastContainer position={"top-center"} /> */}
+        <div className="insidepage col-lg-8 col-md-8 col-sm-10 col-xs-12 custom-width">
           <div className="form">
             <h3 className="postheader">Search Journey Detail</h3>
             <div className="form-row" align="center">
@@ -159,19 +126,7 @@ export default class User extends React.Component {
                 >
                   <option value="--Select a City--">--Select a City--</option>
                 </select>
-                {/* <input
-                  type="text"
-                  value={this.origin}
-                  onChange={this.onChangeOrigin}
-                  // className="input-box3"
-                  autoComplete="off"
-                  className={
-                    this.hasError("origin")
-                      ? "form-control is-invalid "
-                      : "form-control"
-                  }
-                  placeholder="Enter Origin"
-                /> */}
+
                 <div
                   className={
                     this.hasError("origin") ? "inline-errormsg" : "hidden"
@@ -195,19 +150,7 @@ export default class User extends React.Component {
                 >
                   <option value="--Select a City--">--Select a City--</option>
                 </select>
-                {/* <input
-                  type="text"
-                  value={this.destination}
-                  onChange={this.onChangeDestination}
-                  //className="input-box3"
-                  autoComplete="off"
-                  className={
-                    this.hasError("destination")
-                      ? "form-control is-invalid "
-                      : "form-control"
-                  }
-                  placeholder="Enter Destination"
-                /> */}
+
                 <div
                   className={
                     this.hasError("destination") ? "inline-errormsg" : "hidden"
@@ -254,14 +197,13 @@ export default class User extends React.Component {
             </div>
           </div>
           <div>
+            {this.state.loading && <Spinner />}
             {this.state.journeyData ? (
-              this.state.loading ? (
-                <Spinner />
-              ) : (
+              this.state.journeyData.length !== 0 ? (
                 this.state.journeyData.map((item, key) => (
                   <div>
                     {console.log(this.state.journeyData)}
-                    <table className="table table-hover  table-dark">
+                    <table className="table table-hover table-dark table-responsive">
                       <thead>
                         <tr>
                           <th scope="col">Id</th>
@@ -311,6 +253,10 @@ export default class User extends React.Component {
                     </table>
                   </div>
                 ))
+              ) : (
+                <div className="insidepage4">
+                  <h3>Data Is Not Found For These Inputs</h3>
+                </div>
               )
             ) : (
               <div className="insidepage4"></div>

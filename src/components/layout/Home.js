@@ -1,16 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import { connect } from "react-redux";
-// import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export default function Home(props) {
-  // console.log(props);
-  // toast.success(props.name);
   return (
-    <div className="homepage">
-      {/* <ToastContainer position={"top-center"} /> */}
-      <div className="homepage1">
+    <div className="homepage  ">
+      <div className="homepage1 col-lg-5 col-md-6 col-sm-7 col-xs-12 custom-width">
         <p className="para1">
           Hire The Best Traveller For Getting Parcel At Your Destination Point.
         </p>
@@ -21,12 +15,12 @@ export default function Home(props) {
 
         <div className="d-grid gap-2  col-6 mx-auto ">
           <Link to="/user">
-            <button className="btn btn-primary " type="button">
+            <button className="btn btn-primary" type="button">
               Hire A Traveller
             </button>
           </Link>
           <Link to="/traveller">
-            <button className="btn btn-primary " type="button">
+            <button className="btn btn-primary second-btn" type="button">
               Earn Money By Travelling
             </button>
           </Link>
@@ -35,11 +29,3 @@ export default function Home(props) {
     </div>
   );
 }
-
-// function mapStateToProps(state) {
-//   return {
-//     name: state.user,
-//   };
-// }
-
-// export default connect(mapStateToProps)(Home);

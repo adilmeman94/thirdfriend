@@ -5,18 +5,13 @@
   padding: 10px 20px;
   width: 80%;
 }
-/* .form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-} */
+
 .insidepage {
   margin: auto;
-  width: 40%;
   height: 100%;
   background-color: white;
 }
+
 .signinbtn {
   border-radius: 4px;
   border-color: #a60059;
@@ -27,12 +22,10 @@
 .signinheader {
   margin-bottom: 40px;
   margin-top: 20px;
-  justify-content: center;
-  display: flex;
+  text-align: center;
 }
 .signinbr {
   margin-top: 20px;
-  margin-bottom: 30px;
-  justify-content: center;
-  display: flex;
+  margin-bottom: 20px;
+  text-align: center;
 }

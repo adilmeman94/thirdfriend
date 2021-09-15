@@ -3,7 +3,7 @@ import React from "react";
 export default function Terms() {
   return (
     <div className="homepage">
-      <div className="insidepage">
+      <div className="insidepage col-lg-5 col-md-6 col-sm-7 col-xs-12 custom-width">
         <div className="content">
           <h3>Terms &amp; Conditions</h3>
           <br></br>

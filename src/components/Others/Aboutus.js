@@ -3,8 +3,8 @@ import "./styles.css";
 
 export default function Aboutus() {
   return (
-    <div className="homepage">
-      <div className="insidepage">
+    <div className="homepage container-fluid">
+      <div className="insidepage col-lg-5 col-md-6 col-sm-7 col-xs-12 custom-width">
         <div className="content">
           <h3>About Us</h3>
           <br></br>

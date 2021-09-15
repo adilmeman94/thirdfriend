@@ -41,8 +41,6 @@ class App extends Component {
             <Route exact path="/contactus" component={Contactus} />
             <Route exact path="/howit" component={Howit} />
             <Route exact path="/terms" component={Terms} />
-            {/* <Route path="*" component={Notfoundpage} /> */}
-            {/* <Route render={() => <Redirect to={{ pathname: "/notfound" }} />} /> */}
             <Route
               exact
               path="/signin"

@@ -52,8 +52,35 @@
 
 .homepage1 {
   margin: auto;
-  width: 40%;
   padding-top: 100px;
   padding-bottom: 100px;
   text-align: center;
+}
+.second-btn {
+  margin-top: 5%;
+}
+
+.margin-auth {
+  flex-direction: row-reverse;
+}
+.main-div {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-top: 2%;
+  padding-bottom: 1%;
+}
+.div1 {
+  display: flex;
+  flex-direction: column;
+}
+.div2 {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.div3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }

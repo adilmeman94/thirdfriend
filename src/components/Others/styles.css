@@ -42,3 +42,11 @@
 .text1 {
   margin-bottom: 20px;
 }
+.con-box {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.second-box {
+  margin-left: 10%;
+}

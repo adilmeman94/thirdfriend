@@ -14,15 +14,16 @@ export default class Traveller extends React.Component {
       name: "",
       origin: "",
       destination: "",
-      startJourneyDate: new Date(),
+      startJourneyDate: "",
       startJourneyTime: "",
-      endJourneyDate: new Date(),
+      endJourneyDate: "",
       endJourneyTime: "",
       mobile: "",
       maxWeight: "",
       modeOfTransport: "",
       dealPrice: "",
       errors: [],
+      loading: false,
     };
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeOrigin = this.onChangeOrigin.bind(this);
@@ -184,6 +185,9 @@ export default class Traveller extends React.Component {
     if (errors.length > 0) {
       return false;
     } else {
+      this.setState({
+        loading: true,
+      });
       //post request to backend
       fetch("https://thirdfriend01.herokuapp.com/traveller/postdata", {
         method: "POST",
@@ -209,6 +213,7 @@ export default class Traveller extends React.Component {
           if (json.success) {
             toast.success(json.message);
             this.setState({
+              loading: false,
               postError: json.message,
               name: "",
               origin: "",
@@ -222,12 +227,14 @@ export default class Traveller extends React.Component {
               modeOfTransport: "",
               dealPrice: "",
             });
-            // setTimeout(
-            //   this.props.history.push({
-            //     pathname: "/",
-            //   }),
-            //   5000
-            // );
+            window.scrollTo(0, 0);
+            setTimeout(
+              () =>
+                this.props.history.push({
+                  pathname: "/",
+                }),
+              3000
+            );
           } else {
             toast.error(json.message);
             this.setState({
@@ -243,15 +250,13 @@ export default class Traveller extends React.Component {
     return (
       <div className="homepage">
         <ToastContainer position={"top-center"} />
-        <div className="insidepage ">
+        <div className="insidepage col-lg-6 col-md-6 col-sm-8 col-xs-12 custom-width">
           <div className="form">
             <h3 className="signupheader">Post Journey Detail</h3>
-            {/* {postError ? <p>{postError}</p> : null} */}
             <div className="box">
               <label htmlFor="name">Name</label>
               <input
                 type="name"
-                // className="input-box1"
                 autoComplete="off"
                 className={
                   this.hasError("name")
@@ -285,19 +290,6 @@ export default class Traveller extends React.Component {
                 <option value="--Select a City--">--Select a City--</option>
               </select>
 
-              {/* <input
-                type="text"
-                // className="input-box1"
-                autoComplete="off"
-                className={
-                  this.hasError("origin")
-                    ? "form-control is-invalid "
-                    : "form-control"
-                }
-                value={this.origin}
-                onChange={this.onChangeOrigin}
-                placeholder="From : Origin"
-              ></input> */}
               <div
                 className={
                   this.hasError("origin") ? "inline-errormsg" : "hidden"
@@ -321,19 +313,7 @@ export default class Traveller extends React.Component {
               >
                 <option value="--Select a City--">--Select a City--</option>
               </select>
-              {/* <input
-                type="text"
-                //className="input-box1"
-                autoComplete="off"
-                className={
-                  this.hasError("destination")
-                    ? "form-control is-invalid "
-                    : "form-control"
-                }
-                value={this.destination}
-                onChange={this.onChangeDestination}
-                placeholder="To : Destination"
-              ></input> */}
+
               <div
                 className={
                   this.hasError("destination") ? "inline-errormsg" : "hidden"
@@ -343,12 +323,10 @@ export default class Traveller extends React.Component {
               </div>
             </div>
             <div className="form-row">
-              {/* <label htmlFor="name">Start Journey Date &amp; Time</label> */}
               <div className="box col-md-6 mb-2">
                 <label htmlFor="name">Start Journey Date</label>
                 <input
                   type="date"
-                  //className="input-box1 col-md-6"
                   autoComplete="off"
                   className={
                     this.hasError("startJourneyDate")
@@ -373,7 +351,6 @@ export default class Traveller extends React.Component {
                 <label htmlFor="name">Start Journey Time</label>
                 <input
                   type="time"
-                  // className="input-box1 col-md-6"
                   autoComplete="off"
                   className={
                     this.hasError("startJourneyTime")
@@ -400,7 +377,6 @@ export default class Traveller extends React.Component {
                 <label htmlFor="name">End Journey Date</label>
                 <input
                   type="date"
-                  //className="input-box1 col-md-6"
                   autoComplete="off"
                   className={
                     this.hasError("endJourneyDate")
@@ -425,7 +401,6 @@ export default class Traveller extends React.Component {
                 <label htmlFor="name">End Journey Time</label>
                 <input
                   type="time"
-                  //className="input-box2 col-md-6"
                   autoComplete="off"
                   className={
                     this.hasError("endJourneyTime")
@@ -452,7 +427,6 @@ export default class Traveller extends React.Component {
                 <label htmlFor="name">Mobile No.</label>
                 <input
                   type="number"
-                  // className="input-box1 col-md-6"
                   autoComplete="off"
                   className={
                     this.hasError("mobile")
@@ -475,7 +449,6 @@ export default class Traveller extends React.Component {
                 <label htmlFor="name">Max. Capacity Of Weight </label>
                 <input
                   type="number"
-                  //className="input-box1 col-md-6"
                   autoComplete="off"
                   className={
                     this.hasError("maxWeight")
@@ -499,7 +472,6 @@ export default class Traveller extends React.Component {
               <div className="box col-md-6 mb-2">
                 <label htmlFor="name">Mode Of Transport</label>
                 <select
-                  // className="input-box1 col-md-6"
                   autoComplete="off"
                   className={
                     this.hasError("modeOfTransport")
@@ -529,7 +501,6 @@ export default class Traveller extends React.Component {
                 <label htmlFor="name">Expected DealPrice</label>
                 <input
                   type="number"
-                  // className="input-box1 col-md-6"
                   autoComplete="off"
                   className={
                     this.hasError("dealPrice")
@@ -552,7 +523,7 @@ export default class Traveller extends React.Component {
             <br></br>
             <div className="box1">
               <button className="btn btn-success" onClick={this.onPostData}>
-                Post JourneyData
+                {this.state.loading ? "Loading..." : "Post JourneyData"}
               </button>
             </div>
             <br></br>

@@ -4,12 +4,12 @@ import "./styles.css";
 import "bootstrap-css-only";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 export default class Signup extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      isLoading: false,
       signUpError: "",
       signUpFirstName: "",
       signUpLastName: "",
@@ -52,12 +52,8 @@ export default class Signup extends React.Component {
   onSignUp(event) {
     event.preventDefault();
     //grab state
-    const {
-      signUpFirstName,
-      signUpLastName,
-      signUpEmail,
-      signUpPassword,
-    } = this.state;
+    const { signUpFirstName, signUpLastName, signUpEmail, signUpPassword } =
+      this.state;
     //VALIDATE
     var errors = [];
 
@@ -90,6 +86,9 @@ export default class Signup extends React.Component {
     if (errors.length > 0) {
       return false;
     } else {
+      this.setState({
+        isLoading: true,
+      });
       //post request to backend
       fetch("https://thirdfriend01.herokuapp.com/api/account/signup", {
         method: "POST",
@@ -113,10 +112,13 @@ export default class Signup extends React.Component {
               signUpLastName: "",
               signUpEmail: "",
               signUpPassword: "",
+              isLoading: false,
             });
-            this.props.history.push({
-              pathname: "/signin",
-            });
+            setTimeout(() => {
+              this.props.history.push({
+                pathname: "/signin",
+              });
+            }, 3000);
           } else {
             toast.error(json.message);
             this.setState({
@@ -139,13 +141,9 @@ export default class Signup extends React.Component {
     return (
       <div className="homepage">
         <ToastContainer position={"top-center"} />
-        <div className="insidepage">
+        <div className="insidepage col-lg-5 col-md-6 col-sm-7 col-xs-12 custom-width">
           <div className="form">
             <h3 className="signupheader">CREATE ACCOUNT</h3>
-            {/* <div align="center">
-              {" "}
-              {signUpError ? <p>{signUpError}</p> : null}{" "}
-            </div> */}
             <div className="box">
               <label htmlFor="firstname">First Name</label>
               <input
@@ -247,13 +245,13 @@ export default class Signup extends React.Component {
             <br></br>
             <div className="box1">
               <button className="btn btn-success " onClick={this.onSignUp}>
-                SignUp
+                {this.state.isLoading ? "Loading..." : "SignUp"}
               </button>
             </div>
             <div className="signupbr">
-              Have already an account?{" "}
+              Have already an account?
               <Link to="/signin">
-                <strong>Sign In</strong>
+                <strong>SignIn</strong>
               </Link>
             </div>
           </div>
